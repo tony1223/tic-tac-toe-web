@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
+		<link type="text/css" href="css/index.css" rel="stylesheet" />
+		<script src="js/jquery-2.0.0.min.js"></script>
+		<script>
+		$(function(){
+			var records = [];
+			if(localStorage.records != ""){
+				records = JSON.parse(localStorage.records);
+			}
+//			records.push({table:this._table,winer:winer,time: new Date()});
+
+			if(records.length == 0){
+				$("#record").append("<tr><td colspan='3' style='text-align:center;'>No records.</td></tr>");
+				return true;
+			}
+			
+			var out = [];
+			debugger;
+			for(var i = records.length -1 ,index = 1 ; i >= 0 ;--i,++index){
+				if(records[i]){
+					out.push("<tr><td>"+(index)+"</td><td>");
+					switch(records[i].winer){
+						case -1: out.push("no winner");break;
+						case 0: out.push("Circle");break;
+						case 1: out.push("Cross");break;
+					}
+					out.push("</td><td>"+new Date(records[i].time)+"</td></tr>");
+				}
+			}
+			$("#record").append(out.join(""));
+		});
+			
+		</script>
+	</head>
+	<body>
+		<div class="game-record">
+			<h1>Tic-Tac-Toe Records</h1>
+			<table id="record" class="table">
+				<tr>
+					<td>#</td>
+					<td>Winner</td>
+					<td>Time</td>
+				</tr>
+			</table>
+
+			<div class="controll">
+				<a href="index.html" class="btn" >Home</a>
+				<a href="record.html" class="btn" >View Score</a>
+			</div>
+		</div>
+	</body>
+</html>
